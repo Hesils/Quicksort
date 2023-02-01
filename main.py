@@ -10,7 +10,8 @@ def main():
     for i in range(len):
         table.append(random.randint(0, 1000000))
     print("Not sorted : ", str(table))
-    heapsort(table)
+    sorted = heapsort(table)
+    print("sorted : " + str(sorted))
     # exectim = timeit.timeit(lambda: print("sorted : " + str(quicksort(table))), number=1)
     # print("execution time for quicksort = " + str(exectim))
     # exectim = timeit.timeit(lambda: print("sorted : " + str(insertionsort(table))), number=1)

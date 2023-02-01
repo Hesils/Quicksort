@@ -38,8 +38,9 @@ def adjusteMaxHeapNode(heapNode):
     elif not heapNode.right and heapNode.left:
         max, side = heapNode.left.value, "left"
     elif not heapNode.right and not heapNode.left:
-        max, side = -2147483647, "None"
-    max, side = heapNode.left.value, "left" if heapNode.left.value > heapNode.right.value else heapNode.right.value, "right"
+        return heapNode
+    else:
+        max, side = [heapNode.left.value, "left"] if heapNode.left.value > heapNode.right.value else [heapNode.right.value, "right"]
     if max > heapNode.value:
         if side == "left":
             heapNode.left.value = heapNode.value
@@ -52,8 +53,23 @@ def adjusteMaxHeapNode(heapNode):
 def buildMaxHeap(heapHead):
     heapHead = adjusteMaxHeapNode(heapHead)
     # If left recursive on left
+    if heapHead.left:
+        heapHead.left = buildMaxHeap(heapHead.left)
     # If right recursive on right
+    if heapHead.right:
+        heapHead.right = buildMaxHeap(heapHead.right)
     # then readjuste HeapNode
+    heapHead = adjusteMaxHeapNode(heapHead)
+    return heapHead
 
 def heapsort(table):
-    tree = buildTree(table)
+    sorted = []
+    wantedLen = len(table)
+    sortedCount = 0
+    while sortedCount < wantedLen:
+        tree = buildTree(table)
+        tree = buildMaxHeap(tree)
+        sorted = [tree.value] + sorted
+        sortedCount += 1
+        table.remove(tree.value)
+    return sorted
