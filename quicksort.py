@@ -11,26 +11,23 @@ def quicksort(tab):
     rightSide = []
     equal = []
     pivot = tab[int(len(tab)/2)]
-    for i in range(len(tab)):
-        if tab[i] != pivot:
-            if tab[i] < pivot:
-                leftSide.append(tab[i])
+    for item in tab:
+        if item != pivot:
+            if item < pivot:
+                leftSide.append(item)
             else:
-                rightSide.append(tab[i])
+                rightSide.append(item)
         else: 
-            equal.append(tab[i])
-    sortedTab = quicksort(leftSide) + equal + [pivot] + quicksort(rightSide)
-    return sortedTab
+            equal.append(item)
+    return quicksort(leftSide) + equal + quicksort(rightSide)
 
 def main():
-    len = 100000
+    len = 10
     table = []
     for i in range(len):
         table.append(random.randint(0, 1000000))
-    exectim = timeit.timeit(lambda: quicksort(table), number=1)
-    sortedTable  = quicksort(table)
-    print("Not sorted : " + str(table))
-    print("Sorted : " + str(sortedTable))
+    print("Not sorted : ", str(table))
+    exectim = timeit.timeit(lambda: print("sorted : " + str(quicksort(table))), number=1)
     print("execution time = " + str(exectim))
 
 if __name__ == "__main__":
