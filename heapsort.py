@@ -51,6 +51,9 @@ def adjusteMaxHeapNode(heapNode):
 
 def buildMaxHeap(heapHead):
     heapHead = adjusteMaxHeapNode(heapHead)
+    # If left recursive on left
+    # If right recursive on right
+    # then readjuste HeapNode
 
 def heapsort(table):
     tree = buildTree(table)
